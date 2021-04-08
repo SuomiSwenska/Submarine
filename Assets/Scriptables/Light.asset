@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab72635f69573b49a576b72e5a4f1d4, type: 3}
+  m_Name: Light
+  m_EditorClassIdentifier: 
+  name: Light
+  speed: 4
+  damage: 1
+  bulletPrefab: {fileID: 7900186487127334301, guid: ee6f3014aceede7469b3e9f28c03b184,
+    type: 3}
