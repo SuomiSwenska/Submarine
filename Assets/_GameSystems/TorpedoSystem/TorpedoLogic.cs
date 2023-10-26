@@ -52,6 +52,7 @@ public class TorpedoLogic : MonoBehaviour
         _gameplaySystem.torpedoCount++;
         Saver.instance.SaveResult(_gameplaySystem.torpedoCount);
         _gameplaySystem.OnTorpedoDestroy?.Invoke();
+        _uISystem.OnChangeResultCounter?.Invoke(_gameplaySystem.torpedoCount);
         _torpedoGenerator.GetNewTorpedo(_gameplaySystem.gameTimer, _submarineSystem.submarineGO.transform);
     }
 }
