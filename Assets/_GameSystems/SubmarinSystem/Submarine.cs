@@ -11,9 +11,13 @@ public class Submarine : MonoBehaviour
         transform.position += movingDelta;
     }
 
-    public void Fire(BulletConfig weapon)
+    public void Fire(BulletConfig weapon, Color color)
     {
         GameObject bulletGO = Instantiate(weapon.BulletPrefab, barrelPoint.position, Quaternion.identity);
+        MeshRenderer bulletMeshRenderer = bulletGO.GetComponent<MeshRenderer>();
+        Material newMaterial = bulletMeshRenderer.sharedMaterial;
+        newMaterial.color = color;
+        bulletMeshRenderer.sharedMaterial = newMaterial;
         bulletGO.GetComponent<Bullet>().BulletInit(weapon);
     }
 }

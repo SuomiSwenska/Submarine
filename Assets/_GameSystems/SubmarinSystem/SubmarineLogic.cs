@@ -51,6 +51,6 @@ public class SubmarineLogic : MonoBehaviour
 
     private void SubmarineShot()
     {
-        _submarineSystem.submarine.Fire(_submarineSystem.currentWeapon);
+        _submarineSystem.submarine.Fire(_submarineSystem.currentWeapon, _submarineSystem.currentWeapon.name == "Light" ? Color.green : Color.red);
     }
 }
