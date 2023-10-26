@@ -69,7 +69,7 @@ public class Torpedo : MonoBehaviour
 
         _Slip?.Invoke();
 
-        BigBang();
+        Deactivate();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -82,17 +82,20 @@ public class Torpedo : MonoBehaviour
         isExplosion = true;
         Submarine submarine = collision.transform.GetComponent<Submarine>();
         if (submarine != null) { _Hit?.Invoke(); }
-        BigBang();
+        Deactivate();
     }
 
-    private void BigBang()
+    private void Deactivate()
     {
-        Destroy(gameObject, 0.1f);
+        StopAllCoroutines();
+        gameObject.SetActive(false);
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
     }
 
     public void GetDamage(int damage)
     {
         health -= damage;
-        if (health <= 0) { _TorpedoDestroy?.Invoke(); BigBang(); }
+        if (health <= 0) { _TorpedoDestroy?.Invoke(); Deactivate(); }
     }
 }

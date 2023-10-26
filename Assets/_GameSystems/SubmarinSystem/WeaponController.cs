@@ -6,6 +6,10 @@ public class WeaponController : MonoBehaviour
 {
    [SerializeField] private List<BulletConfig> bullets;
 
+    private void Start()
+    {
+        ChangeWeapon(null);
+    }
 
     public BulletConfig ChangeWeapon(BulletConfig currentBullet)
     {

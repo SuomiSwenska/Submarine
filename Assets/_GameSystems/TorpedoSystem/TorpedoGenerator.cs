@@ -6,14 +6,21 @@ public class TorpedoGenerator : MonoBehaviour
 {
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
-    [SerializeField] private GameObject torpedoPrefab;
+    private TorpedoesPool _torpedoesPool;
+
+    private void Awake()
+    {
+        _torpedoesPool = GetComponent<TorpedoesPool>();
+    }
 
     public void GetNewTorpedo(float gameTime, Transform target)
     {
         int rndHealth = Random.Range(1, 4);
         int coeff = GetSpeedCoefficient(gameTime);
         Vector3 instantiatePosition = GetRandomPosition();
-        GameObject torpedoGO = Instantiate(torpedoPrefab, instantiatePosition, Quaternion.identity);
+        GameObject torpedoGO = _torpedoesPool.GetAciveTorpedoGO();
+        torpedoGO.transform.position = instantiatePosition;
+        torpedoGO.transform.rotation = Quaternion.identity;
         torpedoGO.transform.LookAt(target);
         torpedoGO.GetComponent<Torpedo>().TorpedoInit(rndHealth, target, coeff);
     }
