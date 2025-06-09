@@ -2,9 +2,9 @@ name: Unity Build
 
 on:
   push:
-    branches: [master]
+    branches: [main, master]
   pull_request:
-    branches: [master]
+    branches: [main, master]
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
             Unity-${{ runner.os }}-
 
       - name: Install Unity Editor
-        uses: game-ci/unity-installer@v3
+        uses: game-ci/unity-installer@v2
         with:
           version: 2022.3.27f1
 
@@ -34,7 +34,7 @@ jobs:
           targetPlatform: StandaloneWindows64
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Submarine-Windows
           path: build/StandaloneWindows64
