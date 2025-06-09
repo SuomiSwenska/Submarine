@@ -1,0 +1,40 @@
+name: Unity Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build for Windows
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache Unity
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/unity3d
+          key: Unity-${{ runner.os }}-${{ hashFiles('**/ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: |
+            Unity-${{ runner.os }}-
+
+      - name: Install Unity Editor
+        uses: game-ci/unity-installer@v3
+        with:
+          version: 2022.3.27f1
+
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        with:
+          targetPlatform: StandaloneWindows64
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Submarine-Windows
+          path: build/StandaloneWindows64
